@@ -28,6 +28,8 @@ export class NotesComponent implements OnInit {
       next: (response) => {
         if (response.msg == 'done') {
           this.allNotes = response.notes
+          console.log(this.allNotes);
+          
         };
       }
     })
@@ -68,8 +70,8 @@ export class NotesComponent implements OnInit {
         }).then(() => {
           this._NoteService.deleteNote(noteId).subscribe({
             next: (response) => {
-              if (response.msg == "done") {
-                this.allNotes.splice(noteIndex, 1);
+              if (response.msg === "done") {
+                this.allNotes.splice(noteIndex,1);
                 this.ngOnInit();
               }
 
@@ -82,7 +84,7 @@ export class NotesComponent implements OnInit {
   }
 
   updateNote(noteDetail: Inote, noteIndex: number): void {
-    this.openDialog({ title: noteDetail.title, content: noteDetail.content, _id: noteDetail._id })
+    this.openDialog({ title: noteDetail.title, content: noteDetail.content, _id: noteDetail._id,status:noteDetail.status })
 
   }
 
